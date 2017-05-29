@@ -1,12 +1,12 @@
-package org.krams.tutorial.controller;
+package practice.controller;
 
-import org.krams.tutorial.domain.StudentExam;
-import org.krams.tutorial.service.ExamService;
-import org.krams.tutorial.service.StudentService;
-import org.krams.tutorial.service.StudentExamService;
-import org.krams.tutorial.domain.Student;
-import org.krams.tutorial.domain.Exam;
 import org.apache.log4j.Logger;
+import practice.domain.Exam;
+import practice.domain.Student;
+import practice.domain.StudentExam;
+import practice.service.ExamService;
+import practice.service.StudentExamService;
+import practice.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.util.List;
-
-import static java.lang.Thread.sleep;
 
 @Controller
 @RequestMapping("/main")
@@ -64,7 +62,7 @@ public class MainController {
         return "redirect:/krams/main/students";
     }
     @RequestMapping(value = "/students/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value="id", required=true) Integer id,
+    public String delete(@RequestParam(value="id") Integer id,
                          Model model) throws SQLException {
 
         logger.debug("Received request to delete existing student");
@@ -75,7 +73,7 @@ public class MainController {
         return "redirect:/krams/main/students";
     }
     @RequestMapping(value = "/students/edit", method = RequestMethod.GET)
-    public String getEdit(@RequestParam(value="id", required=true) Integer id,
+    public String getEdit(@RequestParam(value="id") Integer id,
                           Model model) throws SQLException {
         logger.debug("Received request to show edit page");
 
@@ -86,7 +84,7 @@ public class MainController {
 
     @RequestMapping(value = "/students/edit", method = RequestMethod.POST)
     public String saveEdit(@ModelAttribute("studentAttribute") Student student,
-                           @RequestParam(value="id", required=true) Integer id,
+                           @RequestParam(value="id") Integer id,
                            Model model) throws SQLException {
         logger.debug("Received request to update student");
 
@@ -127,7 +125,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/studentExams/delete", method = RequestMethod.GET)
-    public String deleteStudentExam(@RequestParam(value="id", required=true) Integer id,
+    public String deleteStudentExam(@RequestParam(value="id") Integer id,
                          Model model) throws SQLException {
 
         logger.debug("Received request to delete existing studentExam");
@@ -139,7 +137,7 @@ public class MainController {
         return "redirect:/krams/main/studentExams";
     }
     @RequestMapping(value = "/studentExams/edit", method = RequestMethod.GET)
-    public String getStudentExamEdit(@RequestParam(value="id", required=true) Integer id,
+    public String getStudentExamEdit(@RequestParam(value="id") Integer id,
                           Model model) throws SQLException {
         logger.debug("Received request to show edit page");
         model.addAttribute("studentExamAttribute", studentExamService.get(id));
@@ -147,7 +145,7 @@ public class MainController {
     }
     @RequestMapping(value = "/studentExams/edit", method = RequestMethod.POST)
     public String saveStudentExamEdit(@ModelAttribute("studentExamAttribute") StudentExam studentExam,
-                           @RequestParam(value="id", required=true) Integer id,
+                           @RequestParam(value="id") Integer id,
                            Model model) throws SQLException {
         logger.debug("Received request to update studentExam");
         studentExam.setId(id);
@@ -188,7 +186,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/exams/delete", method = RequestMethod.GET)
-    public String deleteExam(@RequestParam(value="id", required=true) Integer id,
+    public String deleteExam(@RequestParam(value="id") Integer id,
                              Model model) throws SQLException {
 
         logger.debug("Received request to delete existing exam");
@@ -201,7 +199,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/exams/edit", method = RequestMethod.GET)
-    public String getExamEdit(@RequestParam(value="id", required=true) Integer id,
+    public String getExamEdit(@RequestParam(value="id") Integer id,
                               Model model) throws SQLException {
         logger.debug("Received request to show edit page");
         model.addAttribute("examAttribute", examService.get(id));
@@ -209,7 +207,7 @@ public class MainController {
     }
     @RequestMapping(value = "/exams/edit", method = RequestMethod.POST)
     public String saveExamEdit(@ModelAttribute("examAttribute") Exam exam,
-                               @RequestParam(value="id", required=true) Integer id,
+                               @RequestParam(value="id") Integer id,
                                Model model) throws SQLException {
         logger.debug("Received request to update exam");
 

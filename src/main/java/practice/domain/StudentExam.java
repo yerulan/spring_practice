@@ -1,7 +1,6 @@
-package org.krams.tutorial.domain;
+package practice.domain;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Map;
 
 @Entity
 @Table(name = "tasks")
